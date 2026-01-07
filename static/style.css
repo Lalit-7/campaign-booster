@@ -106,3 +106,16 @@ ul {
 ul li {
   margin: 6px 0;
 }
+.footer {
+    margin-top: 60px;
+    padding: 20px 10px;
+    text-align: center;
+    color: #6b7280;          /* soft gray */
+    font-size: 14px;
+    border-top: 1px solid #e5e7eb;
+    background: linear-gradient(to bottom, #ffffff 0%, #f9fafb 100%);
+}
+
+.footer b {
+    color: #0f766e;          /* teal accent */
+}
