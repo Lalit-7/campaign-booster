@@ -8,35 +8,47 @@ async function analyzeCampaign() {
     return;
   }
 
-  const response = await fetch("/analyze", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ title, description, goal })
-  });
+  //  Show loading text
+  const loadingMessage = document.getElementById("loadingMessage");
+  loadingMessage.style.display = "block";
 
-  const data = await response.json();
+  try {
+    const response = await fetch("/analyze", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ title, description, goal })
+    });
 
-  document.getElementById("results").classList.remove("hidden");
+    const data = await response.json();
 
-  document.getElementById("score").innerText = data.score;
-  document.getElementById("betterTitle").innerText = data.better_title;
-  document.getElementById("betterStory").innerText = data.better_story;
+    document.getElementById("results").classList.remove("hidden");
 
-  const trust = document.getElementById("trust");
-  trust.innerText = data.trust_level;
+    document.getElementById("score").innerText = data.score;
+    document.getElementById("betterTitle").innerText = data.better_title;
+    document.getElementById("betterStory").innerText = data.better_story;
 
-  trust.className = "";
-  trust.classList.add(
-    data.trust_level === "High" ? "trust-high" :
-    data.trust_level === "Medium" ? "trust-medium" :
-    "trust-low"
-  );
+    const trust = document.getElementById("trust");
+    trust.innerText = data.trust_level;
 
-  const list = document.getElementById("suggestions");
-  list.innerHTML = "";
-  data.suggestions.forEach(s => {
-    const li = document.createElement("li");
-    li.innerText = s;
-    list.appendChild(li);
-  });
+    trust.className = "";
+    trust.classList.add(
+      data.trust_level === "High" ? "trust-high" :
+      data.trust_level === "Medium" ? "trust-medium" :
+      "trust-low"
+    );
+
+    const list = document.getElementById("suggestions");
+    list.innerHTML = "";
+    data.suggestions.forEach(s => {
+      const li = document.createElement("li");
+      li.innerText = s;
+      list.appendChild(li);
+    });
+
+  } catch (err) {
+    alert("Something went wrong — please try again.");
+  } finally {
+    //  Hide loading text when done
+    loadingMessage.style.display = "none";
+  }
 }
