@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Campaign Booster</title>
+
+  <link rel="stylesheet" href="/static/style.css" />
+</head>
+
+<body>
+  <div class="container">
+
+    <h1>Campaign Booster</h1>
+    <p class="subtitle">Improve your fundraiser with data-driven suggestions</p>
+
+    <div class="card">
+      <label>Campaign Title</label>
+      <input id="title" type="text" placeholder="Enter campaign title" />
+
+      <label>Campaign Description</label>
+      <textarea id="description" rows="7"
+        placeholder="Paste your campaign description here..."></textarea>
+
+      <label>Goal Amount (₹)</label>
+      <input id="goal" type="number" placeholder="e.g. 150000" />
+
+      <button onclick="analyzeCampaign()">Analyze Campaign</button>
+    </div>
+
+    <div id="results" class="hidden">
+      <h2>Results</h2>
+
+      <p><strong>Score:</strong> <span id="score"></span></p>
+      <p><strong>Trust Level:</strong> <span id="trust"></span></p>
+
+      <h3>Suggestions</h3>
+      <ul id="suggestions"></ul>
+
+      <h3>Improved Title</h3>
+      <p id="betterTitle"></p>
+
+      <h3>Improved Story</h3>
+      <p id="betterStory"></p>
+    </div>
+
+  </div>
+
+  <script src="/static/script.js"></script>
+</body>
+</html>
